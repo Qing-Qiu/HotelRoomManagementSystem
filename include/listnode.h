@@ -1,6 +1,7 @@
 template <typename T>
 class Listnode
 {
+public:
     T val;
     Listnode<T> *prev;
     Listnode<T> *next;

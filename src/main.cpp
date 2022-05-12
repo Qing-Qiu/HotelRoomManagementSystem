@@ -13,7 +13,17 @@ int main()
     std::cout << "|       2.登录                 |\n";
     std::cout << "-------------------------------\n";
     List<int> li;
-    cout<<li.empty()<<endl;
+    for (int i=1;i<=3;i++) {
+        li.push_back(3);
+        cout<<li.size()<<endl;
+    }
+    for (int i=1;i<=3;i++) {
+        li.pop_back();
+        cout<<li.size()<<endl;
+    }
+    cout<<li.size()<<endl;
+    li.clear();
+    cout<<li.size()<<endl;
     return 0;
     char ch;
     while (std::cin>>ch) {

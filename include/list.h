@@ -1,6 +1,7 @@
 #ifndef list
 #define list
 #include "listnode.h"
+#include <iostream>
 template <typename T>
 class List
 {
@@ -20,6 +21,7 @@ public:
     void erase(const T &);
     const List<T> &operator=(const List<T> &);
     const T &operator[](const int);
+    void display();
 
 private:
     int len;
@@ -28,23 +30,32 @@ private:
 };
 
 template <typename T>
-List<T>::List()
+List<T>::List() : head(new Listnode<T>()), tail(new Listnode<T>()), len(0)
 {
+    tail->prev = head;
+    head->next = tail;
 }
 
 template <typename T>
 List<T>::~List()
 {
+    clear();
+    delete head;
+    delete tail;
 }
 
 template <typename T>
 const T &List<T>::front()
 {
+    if (!empty())
+        return head->next->val;
 }
 
 template <typename T>
 const T &List<T>::back()
 {
+    if (!empty())
+        return tail->prev->val;
 }
 
 template <typename T>
@@ -63,28 +74,56 @@ bool List<T>::empty()
 }
 
 template <typename T>
-void List<T>::push_front(const T &a)
+void List<T>::push_front(const T &elem)
 {
+    Listnode<T> *tmp = new Listnode<T>(elem);
+    tmp->prev = head;
+    head->next->prev = tmp;
+    tmp->next = head->next;
+    head->next = tmp;
+    len++;
 }
 
 template <typename T>
-void List<T>::push_back(const T &a)
+void List<T>::push_back(const T &elem)
 {
+    Listnode<T> *tmp = new Listnode<T>(elem);
+    tmp->next = tail;
+    tail->prev->next = tmp;
+    tmp->prev = tail->prev;
+    tail->prev = tmp;
+    len++;
 }
 
 template <typename T>
 void List<T>::pop_front()
 {
+    if (empty())
+        return;
+    Listnode<T> *tmp = head->next;
+    tmp->next->prev = head;
+    head->next = tmp->next;
+    delete tmp;
+    len--;
 }
 
 template <typename T>
 void List<T>::pop_back()
 {
+    if (empty())
+        return;
+    Listnode<T> *tmp = tail->prev;
+    tmp->prev->next = tail;
+    tail->prev = tmp->prev;
+    delete tmp;
+    len--;
 }
 
 template <typename T>
 void List<T>::clear()
 {
+    while (!empty())
+        pop_back();
 }
 
 template <typename T>
@@ -101,8 +140,22 @@ const List<T> &List<T>::operator=(const List<T> &)
 {
 }
 template <typename T>
-const T &List<T>::operator[](const int)
+const T &List<T>::operator[](const int index)
 {
+    // int tmp=index;
+    // Listnode<T> a=head;
+    // T ans;
+    // while (tmp) {
+    //     ans=a.next->val;
+    //     tmp--;
+    //     a=a.next;
+    // }
+    // return ans;
 }
 
+template <typename T>
+void List<T>::display()
+{
+    std::cout << head->next->val << std::endl;
+}
 #endif
