@@ -3,9 +3,9 @@ class Room
 {
 private:
     std::string number;
-    char type;
+    int type;
     int price;
-    bool free;
+    bool occupy;
 
 public:
 };

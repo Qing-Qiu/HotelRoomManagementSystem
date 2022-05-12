@@ -7,33 +7,20 @@
 using namespace std;
 int main()
 {
-    std::cout << "-------------------------------\n";
-    std::cout << "|    欢迎进入宾馆客房管理系统   |\n";
-    std::cout << "|       1.客房信息浏览         |\n";
-    std::cout << "|       2.登录                 |\n";
-    std::cout << "-------------------------------\n";
-    List<int> li;
-    for (int i=1;i<=3;i++) {
-        li.push_back(3);
-        cout<<li.size()<<endl;
-    }
-    for (int i=1;i<=3;i++) {
-        li.pop_back();
-        cout<<li.size()<<endl;
-    }
-    cout<<li.size()<<endl;
-    li.clear();
-    cout<<li.size()<<endl;
-    return 0;
-    char ch;
-    while (std::cin>>ch) {
-        if (ch=='1') {
-
+    Menu menu;
+    menu.defaultMenu();
+    int opt;
+    while (cin >> opt && opt)
+    {
+        if (opt == 1)
+        {
+            menu.mainMenu();
         }
-        else if (ch=='2') {
-
+        else if (opt == 2)
+        {
         }
-        else continue;
+        else
+            continue;
     }
     return 0;
 }

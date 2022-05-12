@@ -1,15 +1,22 @@
 #ifndef guest
 #define guest
+#include "person.h"
 #include <string>
-class Guest
+using namespace std;
+class Guest : public Person
 {
 private:
-    std::string name;
-    std::string credit_card;
-    int hh, mm, ss;
-    int HH, MM, SS;
+    string name;
+    string credit_card;
     int prepay;
 
 public:
+    void reserve_add();
+    void reserve_modify();
+    void reserve_del();
+    void checkin_add();
+    void checkin_modify();
+    void checkin_del();
+    void checkout();
 };
 #endif
