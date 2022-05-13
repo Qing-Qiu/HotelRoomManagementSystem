@@ -2,6 +2,7 @@
 #define list
 #include "listnode.h"
 #include <iostream>
+#include "iterator.h"
 template <typename T>
 class List
 {
@@ -18,7 +19,18 @@ public:
     void pop_back();
     void clear();
     void insert(const int, const T &);
-    void erase(const T &);
+    void erase(const int ,const T &);
+    iterator<T> begin()
+    {
+        iterator it;
+        it.now = head->next;
+        return it;
+    }
+    iterator<T> end(){
+        iterator it;
+        it.now = tail->prev;
+        return it;
+    }
     const List<T> &operator=(const List<T> &);
     const T &operator[](const int);
     void display();
@@ -132,7 +144,7 @@ void List<T>::insert(const int, const T &)
 }
 
 template <typename T>
-void List<T>::erase(const T &)
+void List<T>::erase(const int, const T &)
 {
 }
 template <typename T>
@@ -142,15 +154,7 @@ const List<T> &List<T>::operator=(const List<T> &)
 template <typename T>
 const T &List<T>::operator[](const int index)
 {
-    // int tmp=index;
-    // Listnode<T> a=head;
-    // T ans;
-    // while (tmp) {
-    //     ans=a.next->val;
-    //     tmp--;
-    //     a=a.next;
-    // }
-    // return ans;
+    
 }
 
 template <typename T>

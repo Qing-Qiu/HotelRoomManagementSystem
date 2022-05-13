@@ -7,5 +7,11 @@ class Admin : public Person
         string username;
         string password;
     public:
+        bool login();
         void modify_price();
 };
+
+bool Admin::login()
+{
+    
+}

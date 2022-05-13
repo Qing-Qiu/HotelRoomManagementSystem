@@ -5,7 +5,7 @@ private:
     std::string number;
     int type;
     int price;
-    bool occupy;
+    bool status;
 
 public:
 };
