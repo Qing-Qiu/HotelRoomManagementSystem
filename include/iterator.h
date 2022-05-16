@@ -2,18 +2,17 @@
 #define ITERATOR_H
 #include "listnode.h"
 #include "list.h"
+#include "const_iterator.h"
 template <typename T>
 class List;
 template <typename T>
-class Iterator
+class Iterator : public IteratorC<T>
 {
 public:
-    Iterator() : now(nullptr) {}
+    Iterator(){}
     T &operator*();
     Iterator &operator++(int);
     Iterator &operator++();
-    bool operator==(const Iterator &);
-    bool operator!=(const Iterator &);
     friend class List<T>;
 
 private:
@@ -39,23 +38,5 @@ Iterator<T> &Iterator<T>::operator++()
 {
     now = now->next;
     return *this;
-}
-
-template <typename T>
-bool Iterator<T>::operator==(const Iterator<T> &tmp)
-{
-    if (now == tmp.now)
-        return true;
-    else
-        return false;
-}
-
-template <typename T>
-bool Iterator<T>::operator!=(const Iterator<T> &tmp)
-{
-    if (now != tmp.now)
-        return true;
-    else
-        return false;
 }
 #endif

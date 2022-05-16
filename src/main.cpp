@@ -11,20 +11,17 @@
 using namespace std;
 int main()
 {
-    List<int> li;
-    for (int i = 1; i <= 10; i++)
-        li.push_back(i);
-    for (int i = 1; i <= 10; i++)
-        cout << li[i] << ' ';
-    cout << endl;
-    li.display();
-
-    return 0;
     Menu menu;
     menu.defaultMenu();
-    char opt;
-    while (cin >> opt)
+    File file;
+    Adminlist adminlist;
+    adminlist = file.get_admin_data();
+    bool back2Main = false;
+    bool back2Default = false;
+    while (1)
     {
+        char opt;
+        cin >> opt;
         if (opt == '1')
         {
             menu.mainMenu();
@@ -33,23 +30,82 @@ int main()
             {
                 if (opt_ == '1')
                 {
-                    menu.reserveMenu();
+                    menu.bookMenu();
+                    char opt__;
+                    while (cin >> opt__)
+                    {
+                        if (opt__ == '1')
+                        {
+                        }
+                        else if (opt__ == '2')
+                        {
+                        }
+                        else if (opt__ == '3')
+                        {
+                        }
+                        else if (opt__ == '0')
+                        {
+                            back2Main = true;
+                            break;
+                        }
+                        else
+                            continue;
+                    }
                 }
                 else if (opt_ == '2')
                 {
                     menu.checkinMenu();
+                    char opt__;
+                    while (cin >> opt__)
+                    {
+                        if (opt__ == '1')
+                        {
+                        }
+                        else if (opt__ == '2')
+                        {
+                        }
+                        else if (opt__ == '3')
+                        {
+                        }
+                        else if (opt__ == '0')
+                        {
+                            back2Main = true;
+                            break;
+                        }
+                        else
+                            continue;
+                    }
                 }
                 else if (opt_ == '3')
                 {
                     menu.checkoutMenu();
+                    char opt__;
+                    while (cin >> opt__)
+                    {
+                        if (opt__ == '1')
+                        {
+                        }
+                        else if (opt__ == '0')
+                        {
+                            back2Main = true;
+                            break;
+                        }
+                        else
+                            continue;
+                    }
                 }
                 else if (opt_ == '4')
                 {
                 }
                 else if (opt_ == '0')
                 {
-                    menu.mainMenu();
+                    back2Default = true;
                     break;
+                }
+                if (back2Main)
+                {
+                    menu.mainMenu();
+                    back2Main = false;
                 }
             }
         }
@@ -57,9 +113,29 @@ int main()
         {
             menu.loginMenu();
             Admin admin;
-            if (admin.login())
+            bool flag = false;
+            string username, password;
+            cout << "ÇëÊäÈëÄúµÄÕËºÅ:\n";
+            cin >> username;
+            cout << "ÇëÊäÈëÄúµÄÃÜÂë\n";
+            cin >> password;
+            for (int i = 1; i <= 10; i++)
+            {
+                Admin admin;
+                admin = adminlist[i];
+                if (username == admin.get_username() && password == admin.get_password())
+                {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag)
             {
                 menu.adminMenu();
+            }
+            else
+            {
+                cout << "ÃÜÂë´íÎó£¬ÇëÖØÐÂÊäÈë£¡\n";
             }
         }
         else if (opt == '0')
@@ -68,6 +144,11 @@ int main()
         }
         else
             continue;
+        if (back2Default)
+        {
+            menu.defaultMenu();
+            back2Default = false;
+        }
     }
     return 0;
 }

@@ -1,20 +1,40 @@
 #ifndef ADMIN_H
 #define ADMIN_H
 #include "person.h"
-#include<string>
+#include "adminlist.h"
+#include <string>
+#include <iostream>
 using namespace std;
 class Admin : public Person
 {
-    private:
-        string username;
-        string password;
-    public:
-        bool login();
-        void modify_price();
+private:
+    string username;
+    string password;
+
+public:
+    void set_username(string);
+    void set_password(string);
+    string get_username();
+    string get_password();
 };
 
-bool Admin::login()
+void Admin::set_username(string user)
 {
-    return true;
+    username = user;
+}
+
+void Admin::set_password(string pwd)
+{
+    password = pwd;
+}
+
+string Admin::get_username()
+{
+    return username;
+}
+
+string Admin::get_password()
+{
+    return password;
 }
 #endif

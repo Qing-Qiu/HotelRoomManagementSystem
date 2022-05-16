@@ -6,7 +6,7 @@ class Menu
 public:
     void defaultMenu();
     void mainMenu();
-    void reserveMenu();
+    void bookMenu();
     void checkinMenu();
     void checkoutMenu();
     void loginMenu();
@@ -20,7 +20,7 @@ void Menu::defaultMenu()
     cout << "\t请问您是:\n";
     cout << "\t\t1.客人\n";
     cout << "\t\t2.管理员\n";
-    cout << "\t0.退出\n";
+    cout << "\t0.退出系统\n";
     cout << string(40, '-') + "\n";
 }
 
@@ -36,7 +36,7 @@ void Menu::mainMenu()
     cout << string(40, '-') + "\n";
 }
 
-void Menu::reserveMenu()
+void Menu::bookMenu()
 {
     cout << string(40, '-') + "\n";
     cout << "\t欢迎预订秋刀鱼宾馆的房间\n";
@@ -74,10 +74,11 @@ void Menu::loginMenu()
 {
     cout << string(40, '-') + "\n";
     cout << "\t您好,系统管理员!\n";
+    cout << "\t请输入您的账号和密码:\n";
 }
 
 void Menu::adminMenu()
 {
-
+    cout << "\t欢迎系统管理员!\n";
 }
 #endif

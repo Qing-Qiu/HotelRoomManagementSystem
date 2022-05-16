@@ -7,16 +7,9 @@ class Guest : public Person
 {
 private:
     string name;
-    string credit_card;
+    string id;
     int prepay;
 
 public:
-    void reserve_add();
-    void reserve_modify();
-    void reserve_del();
-    void checkin_add();
-    void checkin_modify();
-    void checkin_del();
-    void checkout();
 };
 #endif

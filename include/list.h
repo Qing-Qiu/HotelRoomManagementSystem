@@ -2,12 +2,18 @@
 #define LIST_H
 #include <iostream>
 #include "iterator.h"
+#include "const_iterator.h"
+template <typename T>
+class IteratorC;
+template <typename T>
+class Iterator;
 template <typename T>
 class List
 {
 public:
     List();
     ~List();
+    List(const List<T> &);
     const T &front();
     const T &back();
     int size();
@@ -19,6 +25,18 @@ public:
     void clear();
     void insert(Iterator<T>, const T &);
     void remove(const T &);
+    IteratorC<T> begin() const
+    {
+        IteratorC<T> it;
+        it.now = head->next;
+        return it;
+    }
+    IteratorC<T> end() const
+    {
+        IteratorC<T> it;
+        it.now = tail->prev;
+        return it;
+    }
     Iterator<T> begin()
     {
         Iterator<T> it;
@@ -61,6 +79,15 @@ List<T>::List() : head(new Listnode<T>()), tail(new Listnode<T>()), len(0)
 {
     tail->prev = head;
     head->next = tail;
+}
+
+template <typename T>
+List<T>::List(const List<T> &rhs) : head(new Listnode<T>()), tail(new Listnode<T>()), len(0)
+{
+    tail->prev = head;
+    head->next = tail;
+    for (IteratorC<T> it = rhs.begin(); it != rhs.end(); it++)
+        push_back(*it);
 }
 
 template <typename T>
@@ -194,8 +221,7 @@ const List<T> &List<T>::operator=(const List<T> &rhs)
     if (this == &rhs)
         return *this;
     clear();
-    Iterator<T> it;
-    for (it = rhs.begin(); it != rhs.end(); it++)
+    for (IteratorC<T> it = rhs.begin(); it != rhs.end(); it++)
         push_back(*it);
     return *this;
 }
@@ -219,8 +245,7 @@ const T &List<T>::operator[](const int index)
 template <typename T>
 void List<T>::display()
 {
-    Iterator<T> it;
-    for (it = begin(); it != end(); it++)
+    for (IteratorC<T> it = begin(); it != end(); it++)
         std::cout << *it << ' ';
     std::cout << *end();
     std::cout << std::endl;
