@@ -1,3 +1,5 @@
+#ifndef LISTNODE_H
+#define LISTNODE_H
 template <typename T>
 class Listnode
 {
@@ -8,3 +10,4 @@ public:
     Listnode(const T &v) : val(v), next(nullptr), prev(nullptr) {}
     Listnode() : next(nullptr), prev(nullptr) {}
 };
+#endif

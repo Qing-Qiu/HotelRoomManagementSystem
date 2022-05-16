@@ -1,3 +1,5 @@
+#ifndef ADMIN_H
+#define ADMIN_H
 #include "person.h"
 #include<string>
 using namespace std;
@@ -13,5 +15,6 @@ class Admin : public Person
 
 bool Admin::login()
 {
-    
+    return true;
 }
+#endif

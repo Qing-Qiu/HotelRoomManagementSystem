@@ -1,5 +1,5 @@
-#ifndef guest
-#define guest
+#ifndef GUEST_H
+#define GUEST_H
 #include "person.h"
 #include <string>
 using namespace std;

@@ -1,4 +1,8 @@
+#ifndef ROOMLIST_H
+#define ROOMLIST_H
 #include "list.h"
-class Roomlist : public List
+#include "room.h"
+class Roomlist : public List<Room>
 {
 };
+#endif

@@ -1,6 +1,5 @@
-#ifndef list
-#define list
-#include "listnode.h"
+#ifndef LIST_H
+#define LIST_H
 #include <iostream>
 #include "iterator.h"
 template <typename T>
@@ -18,18 +17,34 @@ public:
     void pop_front();
     void pop_back();
     void clear();
-    void insert(const int, const T &);
-    void erase(const int ,const T &);
-    iterator<T> begin()
+    void insert(Iterator<T>, const T &);
+    void remove(const T &);
+    Iterator<T> begin()
     {
-        iterator it;
+        Iterator<T> it;
         it.now = head->next;
         return it;
     }
-    iterator<T> end(){
-        iterator it;
+    Iterator<T> end()
+    {
+        Iterator<T> it;
         it.now = tail->prev;
         return it;
+    }
+    Iterator<T> erase(Iterator<T> it)
+    {
+        if (!empty() && it != end())
+        {
+            Listnode<T> *tmp = it.now;
+            Listnode<T> *p = tmp;
+            tmp->prev->next = tmp->next;
+            tmp = tmp->next;
+            delete p;
+            Iterator<T> res;
+            res.now = tmp;
+            len--;
+            return res;
+        }
     }
     const List<T> &operator=(const List<T> &);
     const T &operator[](const int);
@@ -139,27 +154,75 @@ void List<T>::clear()
 }
 
 template <typename T>
-void List<T>::insert(const int, const T &)
+void List<T>::insert(Iterator<T> it, const T &elem)
 {
+    Listnode<T> *tmp = it->now;
+    Listnode<T> *p = new Listnode<T>(elem);
+    tmp->prev->next = p;
+    p->next = tmp;
+    p->prev = tmp->prev;
+    tmp->prev = p;
+    len++;
 }
 
 template <typename T>
-void List<T>::erase(const int, const T &)
+void List<T>::remove(const T &elem)
 {
+    if (empty())
+        return;
+    Listnode<T> *tmp = head->next;
+    while (tmp != tail)
+    {
+        if (tmp->val == elem)
+        {
+            Listnode<T> *p = tmp;
+            tmp->prev->next = tmp->next;
+            tmp->next->prev = tmp->prev;
+            tmp = tmp->next;
+            delete p;
+            p = nullptr;
+            len--;
+        }
+        else
+            tmp = tmp->next;
+    }
 }
+
 template <typename T>
-const List<T> &List<T>::operator=(const List<T> &)
+const List<T> &List<T>::operator=(const List<T> &rhs)
 {
+    if (this == &rhs)
+        return *this;
+    clear();
+    Iterator<T> it;
+    for (it = rhs.begin(); it != rhs.end(); it++)
+        push_back(*it);
+    return *this;
 }
 template <typename T>
 const T &List<T>::operator[](const int index)
 {
-    
+    if (index <= len)
+    {
+        Iterator<T> it = begin();
+        int cnt = index;
+        while (cnt--)
+        {
+            if (cnt == 0)
+                break;
+            it++;
+        }
+        return *it;
+    }
 }
 
 template <typename T>
 void List<T>::display()
 {
-    std::cout << head->next->val << std::endl;
+    Iterator<T> it;
+    for (it = begin(); it != end(); it++)
+        std::cout << *it << ' ';
+    std::cout << *end();
+    std::cout << std::endl;
 }
 #endif
