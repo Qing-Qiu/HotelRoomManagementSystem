@@ -3,6 +3,7 @@
 #include <iostream>
 #include "iterator.h"
 #include "const_iterator.h"
+using namespace std;
 template <typename T>
 class IteratorC;
 template <typename T>
@@ -240,15 +241,16 @@ const T &List<T>::operator[](const int index)
         }
         return *it;
     }
+    Iterator<T> it = begin(); 
+    return *it;					//only to avoid the situation of no return value 
 }
 
 template <typename T>
 void List<T>::display()
 {
-    std::cout << *begin() << endl;
     for (IteratorC<T> it = begin(); it != end(); ++it)
-        std::cout << *it << ' ';
-    std::cout << std::endl;
+        cout << *it << ' ';
+    cout << endl;
 }
 
 #endif

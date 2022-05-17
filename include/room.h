@@ -1,14 +1,15 @@
 #ifndef ROOM_H
 #define ROOM_H
+#include "roomlist.h"
 #include <string>
 using namespace std;
 class Room
 {
 private:
-    string number;
-    int type;
+    int number;
+    string type;
     int price;
-    bool isReserved;
+    bool isBooked;
     bool isChecked;
 
     string guestName;
@@ -18,11 +19,52 @@ private:
     string checkoutTime;
 
 public:
-    Room();
-    Room(string num, int t, int p, bool r, bool c) : number(num), type(t), price(p), isReserved(r), isChecked(c){};
+    Room(){};
+    Room(int num, string t, int p, bool r, bool c) : number(num), type(t), price(p), isBooked(r), isChecked(c){};
+    void set_room(int, string, int, char);
 
-    friend void RoomInit(Room* room);
+    int get_number();
+    string get_type();
+    int get_price();
+    bool get_isBooked();
+    bool get_isChecked();
+
+    friend void RoomInit(Room *room);
     friend class Admin;
     friend class Guest;
 };
+
+void Room::set_room(int num, string t, int p, char status)
+{
+    number = num;
+    type = t;
+    price = p;
+    isBooked = false;
+    isChecked = false;
+    if (status == 'B' || status == 'b')
+        isBooked = true;
+    if (status == 'C' || status == 'c')
+        isChecked = true;
+}
+
+int Room::get_number()
+{
+    return number;
+}
+string Room::get_type()
+{
+    return type;
+}
+int Room::get_price()
+{
+    return price;
+}
+bool Room::get_isBooked()
+{
+    return isBooked;
+}
+bool Room::get_isChecked()
+{
+    return isChecked;
+}
 #endif

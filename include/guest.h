@@ -8,7 +8,7 @@ class Guest : public Person
 private:
     string name;
     string id;
-    int prepay;
+    int cost;
 
 public:
 };

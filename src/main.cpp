@@ -6,6 +6,7 @@
 #include "../include/menu.h"
 #include "../include/file.h"
 #include "../include/admin.h"
+#include <windows.h>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -15,9 +16,11 @@ int main()
     menu.defaultMenu();
     File file;
     Adminlist adminlist;
-    adminlist = file.get_admin_data();
-    bool back2Main = false;
-    bool back2Default = false;
+    adminlist = file.get_admin_data(); //获取管理员账号密码
+    Roomlist roomlist;
+    roomlist = file.get_room_data();
+    bool back2Main = false;            //返回主界面
+    bool back2Default = false;         //返回默认界面
     while (1)
     {
         char opt;
@@ -112,30 +115,47 @@ int main()
         else if (opt == '2')
         {
             menu.loginMenu();
-            bool flag = false;
+            bool loginSuccess = false;
             string username, password;
-            cout << "请输入您的账号:\n";
-            cin >> username;
-            cout << "请输入您的密码\n";
-            cin >> password;
-            Iterator<Admin> it;
-            Admin admin;
-            for (int i = 1; i <= 10; i++)
+            while (1)
             {
-                admin = adminlist[i];
-                if (username == admin.get_username() && password == admin.get_password())
+                cout << "请输入您的账号:";
+                cin >> username;
+                cout << "请输入您的密码:";
+                cin >> password;
+                Iterator<Admin> it;
+                Admin admin;
+                for (int i = 1; i <= 10; i++)
                 {
-                    flag = true;
+                    admin = adminlist[i];
+                    if (username == admin.get_username() && password == admin.get_password())
+                    {
+                        loginSuccess = true;
+                        break;
+                    }
+                }
+                if (loginSuccess)
+                {
+                    menu.adminMenu();
                     break;
                 }
-            }
-            if (flag)
-            {
-                menu.adminMenu();
-            }
-            else
-            {
-                cout << "密码错误，请重新输入！\n";
+                else
+                {
+                    system("cls");
+                    cout << "密码错误，是否重新输入？(Y/N)\n";
+                    char ch;
+                    cin >> ch;
+                    if (ch == 'Y' || ch == 'y')
+                        continue;
+                    else if (ch == 'N' || ch == 'n')
+                        break;
+                    else
+                    {
+                        cout << "请不要输入无效字符！";
+                        cout << endl;
+                        continue;
+                    }
+                }
             }
         }
         else if (opt == '0')
