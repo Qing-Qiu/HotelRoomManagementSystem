@@ -112,16 +112,16 @@ int main()
         else if (opt == '2')
         {
             menu.loginMenu();
-            Admin admin;
             bool flag = false;
             string username, password;
             cout << "ÇëÊäÈëÄúµÄÕËºÅ:\n";
             cin >> username;
             cout << "ÇëÊäÈëÄúµÄÃÜÂë\n";
             cin >> password;
+            Iterator<Admin> it;
+            Admin admin;
             for (int i = 1; i <= 10; i++)
             {
-                Admin admin;
                 admin = adminlist[i];
                 if (username == admin.get_username() && password == admin.get_password())
                 {

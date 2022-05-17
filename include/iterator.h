@@ -9,34 +9,39 @@ template <typename T>
 class Iterator : public IteratorC<T>
 {
 public:
-    Iterator(){}
+    Iterator() {}
     T &operator*();
-    Iterator &operator++(int);
+    const T &operator*() const;
     Iterator &operator++();
+    Iterator operator++(int);
     friend class List<T>;
-
-private:
-    Listnode<T> *now;
 };
 
 template <typename T>
 T &Iterator<T>::operator*()
 {
-    return now->val;
+    return IteratorC<T>::now->val;
 }
 
 template <typename T>
-Iterator<T> &Iterator<T>::operator++(int)
+const T &Iterator<T>::operator*() const
+{
+    return IteratorC<T>::operator*();
+}
+
+template <typename T>
+Iterator<T> &Iterator<T>::operator++()
+{
+    IteratorC<T>::now = IteratorC<T>::now->next;
+    return *this;
+}
+
+template <typename T>
+Iterator<T> Iterator<T>::operator++(int)
 {
     Iterator it = *this;
     ++(*this);
     return it;
 }
 
-template <typename T>
-Iterator<T> &Iterator<T>::operator++()
-{
-    now = now->next;
-    return *this;
-}
 #endif

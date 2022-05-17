@@ -34,7 +34,7 @@ public:
     IteratorC<T> end() const
     {
         IteratorC<T> it;
-        it.now = tail->prev;
+        it.now = tail;
         return it;
     }
     Iterator<T> begin()
@@ -46,7 +46,7 @@ public:
     Iterator<T> end()
     {
         Iterator<T> it;
-        it.now = tail->prev;
+        it.now = tail;
         return it;
     }
     Iterator<T> erase(Iterator<T> it)
@@ -86,7 +86,7 @@ List<T>::List(const List<T> &rhs) : head(new Listnode<T>()), tail(new Listnode<T
 {
     tail->prev = head;
     head->next = tail;
-    for (IteratorC<T> it = rhs.begin(); it != rhs.end(); it++)
+    for (IteratorC<T> it = rhs.begin(); it != rhs.end(); ++it)
         push_back(*it);
 }
 
@@ -221,7 +221,7 @@ const List<T> &List<T>::operator=(const List<T> &rhs)
     if (this == &rhs)
         return *this;
     clear();
-    for (IteratorC<T> it = rhs.begin(); it != rhs.end(); it++)
+    for (IteratorC<T> it = rhs.begin(); it != rhs.end(); ++it)
         push_back(*it);
     return *this;
 }
@@ -245,9 +245,10 @@ const T &List<T>::operator[](const int index)
 template <typename T>
 void List<T>::display()
 {
-    for (IteratorC<T> it = begin(); it != end(); it++)
+    std::cout << *begin() << endl;
+    for (IteratorC<T> it = begin(); it != end(); ++it)
         std::cout << *it << ' ';
-    std::cout << *end();
     std::cout << std::endl;
 }
+
 #endif

@@ -9,7 +9,7 @@ class IteratorC
 public:
     IteratorC() : now(nullptr) {}
     const T &operator*() const;
-    IteratorC &operator++(int);
+    IteratorC operator++(int);
     IteratorC &operator++();
     bool operator==(const IteratorC &);
     bool operator!=(const IteratorC &);
@@ -26,7 +26,7 @@ const T &IteratorC<T>::operator*() const
 }
 
 template <typename T>
-IteratorC<T> &IteratorC<T>::operator++(int)
+IteratorC<T> IteratorC<T>::operator++(int)
 {
     IteratorC it = *this;
     ++(*this);

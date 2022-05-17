@@ -15,7 +15,7 @@ Adminlist File::get_admin_data()
     ifstream fin;
     string user, pwd;
     Adminlist adminlist;
-    fin.open("./date/adminlist.txt");
+    fin.open("../data/admindata.txt");
     for (int i = 1; i <= 10; i++) {
         fin >> user >> pwd;
         Admin admin;
