@@ -14,6 +14,8 @@ public:
     const T &operator*() const;
     Iterator &operator++();
     Iterator operator++(int);
+    Iterator &operator--();
+    Iterator operator--(int);
     friend class List<T>;
 };
 
@@ -44,4 +46,18 @@ Iterator<T> Iterator<T>::operator++(int)
     return it;
 }
 
+template <typename T>
+Iterator<T> &Iterator<T>::operator--()
+{
+    IteratorC<T>::now = IteratorC<T>::now->prev;
+    return *this;
+}
+
+template <typename T>
+Iterator<T> Iterator<T>::operator--(int)
+{
+    Iterator it = *this;
+    --(*this);
+    return it;
+}
 #endif

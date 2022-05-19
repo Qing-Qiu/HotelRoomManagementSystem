@@ -68,8 +68,9 @@ public:
     const List<T> &operator=(const List<T> &);
     const T &operator[](const int);
     void display();
+    void swap(Iterator<T>, Iterator<T>);
 
-private:
+protected:
     int len;
     Listnode<T> *head;
     Listnode<T> *tail;
@@ -184,7 +185,7 @@ void List<T>::clear()
 template <typename T>
 void List<T>::insert(Iterator<T> it, const T &elem)
 {
-    Listnode<T> *tmp = it->now;
+    Listnode<T> *tmp = it.now;
     Listnode<T> *p = new Listnode<T>(elem);
     tmp->prev->next = p;
     p->next = tmp;
@@ -241,8 +242,8 @@ const T &List<T>::operator[](const int index)
         }
         return *it;
     }
-    Iterator<T> it = begin(); 
-    return *it;					//only to avoid the situation of no return value 
+    Iterator<T> it = begin();
+    return *it; // only to avoid the situation of no return value
 }
 
 template <typename T>
@@ -251,6 +252,47 @@ void List<T>::display()
     for (IteratorC<T> it = begin(); it != end(); ++it)
         cout << *it << ' ';
     cout << endl;
+}
+
+template <typename T>
+void List<T>::swap(Iterator<T> it1, Iterator<T> it2)
+{
+    Listnode<T> *tmp1, *tmp2;
+    tmp1 = it1.now;
+    tmp2 = it2.now;
+    if (tmp1->next == tmp2)
+    {
+        tmp1->prev->next = tmp2;
+        tmp1->next = tmp2->next;
+        tmp2->next = tmp1;
+        tmp2->next->prev = tmp1;
+        tmp2->prev = tmp1->prev;
+        tmp1->prev = tmp2;
+    }
+    else if (tmp1->prev == tmp2)
+    {
+        tmp2->prev->next = tmp1;
+        tmp2->next = tmp1->next;
+        tmp1->next = tmp2;
+        tmp1->next->prev = tmp2;
+        tmp1->prev = tmp2->prev;
+        tmp2->prev = tmp1;
+    }
+    else
+    {
+        Listnode<T> *tmp = tmp1->prev;
+        Listnode<T> *tmp_ = tmp2->next;
+        Listnode<T> *tmp__ = tmp1->next;
+        Listnode<T> *tmp___ = tmp2->prev;
+        tmp1->prev->next = tmp2;
+        tmp2->next->prev = tmp1;
+        tmp1->next->prev = tmp2;
+        tmp2->prev->next = tmp1;
+        tmp1->prev = tmp___;
+        tmp2->next = tmp__;
+        tmp1->next = tmp_;
+        tmp2->prev = tmp;
+    }
 }
 
 #endif

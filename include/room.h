@@ -32,6 +32,9 @@ public:
     friend void RoomInit(Room *room);
     friend class Admin;
     friend class Guest;
+    friend class Book;
+    friend class Checkin;
+    friend class Checkout;
 };
 
 void Room::set_room(int num, string t, int p, char status)

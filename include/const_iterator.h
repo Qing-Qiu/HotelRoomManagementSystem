@@ -11,6 +11,8 @@ public:
     const T &operator*() const;
     IteratorC operator++(int);
     IteratorC &operator++();
+    IteratorC operator--(int);
+    IteratorC &operator--();
     bool operator==(const IteratorC &);
     bool operator!=(const IteratorC &);
     friend class List<T>;
@@ -37,6 +39,21 @@ template <typename T>
 IteratorC<T> &IteratorC<T>::operator++()
 {
     now = now->next;
+    return *this;
+}
+
+template <typename T>
+IteratorC<T> IteratorC<T>::operator--(int)
+{
+    IteratorC it = *this;
+    --(*this);
+    return it;
+}
+
+template <typename T>
+IteratorC<T> &IteratorC<T>::operator--()
+{
+    now = now->prev;
     return *this;
 }
 
