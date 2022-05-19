@@ -66,7 +66,7 @@ public:
         }
     }
     const List<T> &operator=(const List<T> &);
-    const T &operator[](const int);
+    T &operator[](const int);
     void display();
     void swap(Iterator<T>, Iterator<T>);
 
@@ -228,7 +228,7 @@ const List<T> &List<T>::operator=(const List<T> &rhs)
     return *this;
 }
 template <typename T>
-const T &List<T>::operator[](const int index)
+T &List<T>::operator[](const int index)
 {
     if (index <= len)
     {

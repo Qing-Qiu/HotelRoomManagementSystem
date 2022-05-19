@@ -11,6 +11,7 @@ class File
 public:
     Adminlist get_admin_data();
     Roomlist get_room_data();
+    void write(Roomlist);
 };
 
 Adminlist File::get_admin_data()
@@ -39,10 +40,14 @@ Roomlist File::get_room_data()
     int price;
     char status;
     Roomlist roomlist;
-    fin.open("../data/roomdata.txt");
-    while (!fin.eof())
+    fin.open("../data/roomdata.txt"); // stringstream
+    while (1)
     {
+        string s;
+        // stringstream ss;
         fin >> number >> type >> price >> status;
+        if (fin.eof())
+            break;
         Room room;
         room.set_room(number, type, price, status);
         roomlist.push_back(room);
@@ -51,4 +56,20 @@ Roomlist File::get_room_data()
     return roomlist;
 }
 
+void File::write(Roomlist roomlist)
+{
+    fstream file;
+    file.open("../data/tmp.txt", ios::out | ios::binary);
+    ofstream fout;
+    fout.open("../data/tmp.txt");
+    for (auto i = roomlist.begin(); i != roomlist.end(); i++)
+    {
+        Room room = *i;
+        fout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t';
+        fout << (room.get_isBooked() ? "B" : "A") << '\t' << (room.get_isChecked() ? "C" : "B") << '\t';
+        fout << room.get_guestName() << '\t' << room.get_guestID() << '\t';
+        fout << room.get_bookTime() << '\t' << room.get_checkinTime() << '\t' << room.get_checkoutTime() << endl;
+    }
+    fout.close();
+}
 #endif

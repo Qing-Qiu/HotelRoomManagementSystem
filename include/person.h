@@ -55,18 +55,7 @@ void Person::sort_by_time(Roomlist roomlist)
         }
         posi++;
     }
-
-    system("pause");
-    system("cls");
-    Iterator<Room> it;
-    cout << "房间号\t房间类型\t房间价格\t是否预订\t是否入住\t" << endl;
-    for (it = roomlist.begin(); it != roomlist.end(); ++it)
-    {
-        Room room;
-        room = *it;
-        cout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t';
-        cout << (room.get_isBooked() ? "Yes" : "No") << '\t' << (room.get_isChecked() ? "Yes" : "No") << endl;
-    }
+    view(roomlist);
 }
 
 void Person::sort_by_num(Roomlist roomlist)
@@ -95,17 +84,6 @@ void Person::sort_by_num(Roomlist roomlist)
         }
         posi++;
     }
-
-    system("pause");
-    system("cls");
-    Iterator<Room> it;
-    cout << "房间号\t房间类型\t房间价格\t是否预订\t是否入住\t" << endl;
-    for (it = roomlist.begin(); it != roomlist.end(); ++it)
-    {
-        Room room;
-        room = *it;
-        cout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t';
-        cout << (room.get_isBooked() ? "Yes" : "No") << '\t' << (room.get_isChecked() ? "Yes" : "No") << endl;
-    }
+    view(roomlist);
 }
 #endif

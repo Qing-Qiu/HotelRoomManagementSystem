@@ -20,14 +20,6 @@ int main()
     adminlist = file.get_admin_data(); //获取管理员账号密码
     Roomlist roomlist;
     roomlist = file.get_room_data(); //获取客房信息
-/*  cout<<(*roomlist[1]).get_number()<<endl;
-    cout<<(*roomlist[2]).get_number()<<endl;
-    auto a=roomlist.begin(),b=roomlist.begin();
-    b++;
-    roomlist.swap(a,b);
-    cout<<(*roomlist[1]).get_number()<<endl;
-    cout<<(*roomlist[2]).get_number()<<endl;
-    return 0; */
     bool back2Main = false;          //返回主界面
     bool back2Default = false;       //返回默认界面
     while (1)
@@ -49,15 +41,18 @@ int main()
                     {
                         if (opt__ == '1') //增加预订客房信息
                         {
-                            guest.book.add();
+                            guest.view(roomlist);
+                            guest.book.add(roomlist);
                         }
                         else if (opt__ == '2') //修改预订客房信息
                         {
-                            guest.book.modify();
+                            guest.view(roomlist);
+                            guest.book.modify(roomlist);
                         }
                         else if (opt__ == '3') //删除预订房间信息
                         {
-                            guest.book.del();
+                            guest.view(roomlist);
+                            guest.book.del(roomlist);
                         }
                         else if (opt__ == '0') //返回上一级
                         {
@@ -76,15 +71,18 @@ int main()
                     {
                         if (opt__ == '1') //入住登记
                         {
-                            guest.checkin.add();
+                            guest.view(roomlist);
+                            guest.checkin.add(roomlist);
                         }
                         else if (opt__ == '2') //修改入住登记信息
                         {
-                            guest.checkin.modify();
+                            guest.view(roomlist);
+                            guest.checkin.modify(roomlist);
                         }
                         else if (opt__ == '3') //删除入住登记信息
                         {
-                            guest.checkin.del();
+                            guest.view(roomlist);
+                            guest.checkin.del(roomlist);
                         }
                         else if (opt__ == '0') //返回上一级
                         {
@@ -103,7 +101,8 @@ int main()
                     {
                         if (opt__ == '1') //退房结算
                         {
-                            guest.checkout.checkout();
+                            guest.view(roomlist);
+                            guest.checkout.checkout(roomlist);
                         }
                         else if (opt__ == '0') //返回上一级
                         {
@@ -121,9 +120,9 @@ int main()
                     char ch;
                     while (cin >> ch)
                     {
-                        if (ch == '1')  //按照房间号排序
+                        if (ch == '1') //按照房间号排序
                         {
-                        	guest.sort_by_num(roomlist);
+                            guest.sort_by_num(roomlist);
                         }
                         else if (ch == '2') //按照入住时间排序
                         {
@@ -134,6 +133,8 @@ int main()
                         }
                         else if (ch == '0') //返回上一级
                         {
+                            back2Main = true;
+                            break;
                         }
                         else
                             continue;
@@ -179,13 +180,15 @@ int main()
                     char opt_;
                     while (cin >> opt_)
                     {
-                        if (opt_ == '1')    //客房信息浏览
+                        if (opt_ == '1') //客房信息浏览
                         {
+                            admin.view(roomlist);
                         }
-                        else if (opt_ == '2')   //客房信息修改
+                        else if (opt_ == '2') //客房信息修改
                         {
+                            admin.view(roomlist);
                         }
-                        else if (opt_ == '0')   //返回上一级
+                        else if (opt_ == '0') //返回上一级
                         {
                             back2Default = true;
                             break;
