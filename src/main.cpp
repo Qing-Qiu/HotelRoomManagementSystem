@@ -7,7 +7,6 @@
 #include "../include/file.h"
 #include "../include/admin.h"
 #include <windows.h>
-#include <time.h>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -187,6 +186,12 @@ int main()
                         else if (opt_ == '2') //客房信息修改
                         {
                             admin.view(roomlist);
+                        }
+                        else if (opt_ == '3') //客房信息初始化
+                        {
+                            file.roomInit();
+                            back2Default = true;
+                            break;
                         }
                         else if (opt_ == '0') //返回上一级
                         {

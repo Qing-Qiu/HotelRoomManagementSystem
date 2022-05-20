@@ -94,6 +94,7 @@ void Menu::adminMenu()
     cout << "\t请选择您要进行的操作\n";
     cout << "\t\t1.客房信息浏览\n";
     cout << "\t\t2.客房信息修改\n";
+    cout << "\t\t3.客房信息初始化\n";
     cout << "\t\t0.返回\n";
     cout << string(40, '-') + "\n";
 }

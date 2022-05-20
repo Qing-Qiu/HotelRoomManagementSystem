@@ -11,6 +11,7 @@ class File
 public:
     Adminlist get_admin_data();
     Roomlist get_room_data();
+    void roomInit();
     void write(Roomlist);
 };
 
@@ -38,37 +39,73 @@ Roomlist File::get_room_data()
     int number;
     string type;
     int price;
-    char status;
+    char isBooked;
+    char isChecked;
+    string guestName;
+    string guestID;
+    string guestPhoneNum;
+    string bookTime;
+    string checkinTime;
+    string checkoutTime;
     Roomlist roomlist;
-    fin.open("../data/roomdata.txt"); // stringstream
+    fin.open("../data/roomdata.txt");
     while (1)
     {
-        string s;
-        // stringstream ss;
-        fin >> number >> type >> price >> status;
+        fin >> number >> type >> price >> isBooked >> isChecked >> guestName >> guestID >> guestPhoneNum >> bookTime >> checkinTime >> checkoutTime;
         if (fin.eof())
             break;
         Room room;
-        room.set_room(number, type, price, status);
+        room.set_room(number, type, price, isBooked, isChecked, guestName, guestID, guestPhoneNum, bookTime, checkinTime, checkoutTime);
         roomlist.push_back(room);
     }
     fin.close();
     return roomlist;
 }
 
+void File::roomInit()
+{
+    ifstream fin;
+    int number;
+    string type;
+    int price;
+    char isBooked;
+    char isChecked;
+    string guestName;
+    string guestID;
+    string guestPhoneNum;
+    string bookTime;
+    string checkinTime;
+    string checkoutTime;
+    Roomlist roomlist;
+    fin.open("../data/roominit.txt");
+    while (1)
+    {
+        fin >> number >> type >> price >> isBooked >> isChecked >> guestName >> guestID >> guestPhoneNum >> bookTime >> checkinTime >> checkoutTime;
+        if (fin.eof())
+            break;
+        Room room;
+        room.set_room(number, type, price, isBooked, isChecked, guestName, guestID, guestPhoneNum, bookTime, checkinTime, checkoutTime);
+        roomlist.push_back(room);
+    }
+    fin.close();
+    write(roomlist);
+    cout << "客房信息初始化成功！" << endl;
+}
+
 void File::write(Roomlist roomlist)
 {
     fstream file;
-    file.open("../data/tmp.txt", ios::out | ios::binary);
+    file.open("../data/roomdata.txt", ios::out | ios::binary);
+    file.close();
     ofstream fout;
-    fout.open("../data/tmp.txt");
+    fout.open("../data/roomdata.txt");
     for (auto i = roomlist.begin(); i != roomlist.end(); i++)
     {
         Room room = *i;
-        fout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t';
-        fout << (room.get_isBooked() ? "B" : "A") << '\t' << (room.get_isChecked() ? "C" : "B") << '\t';
-        fout << room.get_guestName() << '\t' << room.get_guestID() << '\t';
-        fout << room.get_bookTime() << '\t' << room.get_checkinTime() << '\t' << room.get_checkoutTime() << endl;
+        fout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t'
+             << (room.get_isBooked() ? "Y" : "N") << '\t' << (room.get_isChecked() ? "Y" : "N") << '\t'
+             << room.get_guestName() << '\t' << room.get_guestID() << '\t' << room.get_guestPhoneNum() << '\t'
+             << room.get_bookTime() << '\t' << room.get_checkinTime() << '\t' << room.get_checkoutTime() << endl;
     }
     fout.close();
 }

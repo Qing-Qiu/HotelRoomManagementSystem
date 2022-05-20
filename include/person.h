@@ -5,14 +5,16 @@
 #include "list.h"
 #include "iterator.h"
 #include "const_iterator.h"
+#include <windows.h>
 class Room;
 class Roomlist;
 class Person
 {
 public:
-    void view(Roomlist);
+    void view(Roomlist); //可以改为纯虚函数
     void sort_by_time(Roomlist);
     void sort_by_num(Roomlist);
+    static string nowTime();
 };
 
 void Person::view(Roomlist roomlist)
@@ -43,7 +45,7 @@ void Person::sort_by_time(Roomlist roomlist)
             posj++;
             Room room1 = *posi;
             Room room2 = *posj;
-            if (1)  //to be written
+            if (room1.get_checkinTime() < room2.get_checkinTime())
             {
                 tmp = posj;
             }
@@ -85,5 +87,14 @@ void Person::sort_by_num(Roomlist roomlist)
         posi++;
     }
     view(roomlist);
+}
+
+string Person::nowTime()
+{
+    SYSTEMTIME time;
+    GetLocalTime(&time);
+    string res;
+    res = to_string(time.wYear) + "." + to_string(time.wMonth) + "." + to_string(time.wDay) + "|" + to_string(time.wHour) + ":" + to_string(time.wMinute) + ":" + to_string(time.wSecond);
+    return res;
 }
 #endif
