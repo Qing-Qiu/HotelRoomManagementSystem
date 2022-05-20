@@ -81,11 +81,11 @@ void File::roomInit()
     while (1)
     {
         fin >> number >> type >> price >> isBooked >> isChecked >> guestName >> guestID >> guestPhoneNum >> bookTime >> checkinTime >> checkoutTime;
-        if (fin.eof())
-            break;
         Room room;
         room.set_room(number, type, price, isBooked, isChecked, guestName, guestID, guestPhoneNum, bookTime, checkinTime, checkoutTime);
         roomlist.push_back(room);
+        if (fin.eof())
+            break;
     }
     fin.close();
     write(roomlist);

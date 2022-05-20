@@ -12,8 +12,8 @@ class Person
 {
 public:
     void view(Roomlist); //可以改为纯虚函数
-    void sort_by_time(Roomlist);
-    void sort_by_num(Roomlist);
+    void sort_by_time(Roomlist &);
+    void sort_by_num(Roomlist &);
     static string nowTime();
 };
 
@@ -31,7 +31,7 @@ void Person::view(Roomlist roomlist)
     }
 }
 
-void Person::sort_by_time(Roomlist roomlist)
+void Person::sort_by_time(Roomlist &roomlist)
 {
     int len = roomlist.size();
     auto beg = roomlist.begin();
@@ -60,7 +60,7 @@ void Person::sort_by_time(Roomlist roomlist)
     view(roomlist);
 }
 
-void Person::sort_by_num(Roomlist roomlist)
+void Person::sort_by_num(Roomlist &roomlist)
 {
     int len = roomlist.size();
     auto beg = roomlist.begin();

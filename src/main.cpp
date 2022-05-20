@@ -21,7 +21,7 @@ int main()
     roomlist = file.get_room_data(); //获取客房信息
     bool back2Main = false;          //返回主界面
     bool back2Default = false;       //返回默认界面
-    while (1)
+    while (1)                                                           //考虑房间已满的情况
     {
         char opt;
         cin >> opt;
@@ -42,16 +42,22 @@ int main()
                         {
                             guest.view(roomlist);
                             guest.book.add(roomlist);
+                            back2Main = true;
+                            break;
                         }
                         else if (opt__ == '2') //修改预订客房信息
                         {
                             guest.view(roomlist);
                             guest.book.modify(roomlist);
+                            back2Main = true;
+                            break;
                         }
                         else if (opt__ == '3') //删除预订房间信息
                         {
                             guest.view(roomlist);
                             guest.book.del(roomlist);
+                            back2Main = true;
+                            break;
                         }
                         else if (opt__ == '0') //返回上一级
                         {
@@ -72,16 +78,22 @@ int main()
                         {
                             guest.view(roomlist);
                             guest.checkin.add(roomlist);
+                            back2Main = true;
+                            break;
                         }
                         else if (opt__ == '2') //修改入住登记信息
                         {
                             guest.view(roomlist);
                             guest.checkin.modify(roomlist);
+                            back2Main = true;
+                            break;
                         }
                         else if (opt__ == '3') //删除入住登记信息
                         {
                             guest.view(roomlist);
                             guest.checkin.del(roomlist);
+                            back2Main = true;
+                            break;
                         }
                         else if (opt__ == '0') //返回上一级
                         {
@@ -102,6 +114,8 @@ int main()
                         {
                             guest.view(roomlist);
                             guest.checkout.checkout(roomlist);
+                            back2Main = true;
+                            break;
                         }
                         else if (opt__ == '0') //返回上一级
                         {

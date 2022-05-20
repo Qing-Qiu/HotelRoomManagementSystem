@@ -17,11 +17,12 @@ private:
     string bookTime;
     string checkinTime;
     string checkoutTime;
+
 public:
     Room(){};
     Room(int num, string t, int p, bool r, bool c) : number(num), type(t), price(p), isBooked(r), isChecked(c){};
     void set_room(int, string, int, char, char);
-    void set_room(int,string,int,char,char,string,string,string,string,string,string);
+    void set_room(int, string, int, char, char, string, string, string, string, string, string);
     int get_number();
     string get_type();
     int get_price();
@@ -62,7 +63,7 @@ void Room::set_room(int num, string t, int p, char b, char c)
     if (c == 'Y' || c == 'y')
         isChecked = true;
 }
-void Room::set_room(int num, string t, int p, char b, char c,string name,string id,string phonenum,string btime,string intime,string outtime)
+void Room::set_room(int num, string t, int p, char b, char c, string name, string id, string phonenum, string btime, string intime, string outtime)
 {
     number = num;
     type = t;
@@ -167,6 +168,6 @@ void Room::set_checkinTime(string s)
 }
 void Room::set_checkoutTime(string s)
 {
-    checkoutTime =s;
+    checkoutTime = s;
 }
 #endif
