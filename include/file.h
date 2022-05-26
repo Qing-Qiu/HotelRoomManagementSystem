@@ -89,7 +89,7 @@ void File::roomInit()
     }
     fin.close();
     write(roomlist);
-    cout << "瀹㈡埧淇℃伅鍒濆鍖栨垚鍔燂紒" << endl;
+    cout << "客房信息初始化成功！" << endl;
 }
 
 void File::write(Roomlist roomlist)

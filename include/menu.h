@@ -7,8 +7,6 @@ public:
     void defaultMenu();
     void mainMenu();
     void bookMenu();
-    void checkinMenu();
-    void checkoutMenu();
     void loginMenu();
     void adminMenu();
     void viewMenu();
@@ -49,30 +47,6 @@ void Menu::bookMenu()
     cout << "\t\t1.我要预订\n";
     cout << "\t\t2.修改预订信息\n";
     cout << "\t\t3.取消预订\n";
-    cout << "\t\t0.返回\n";
-    cout << string(40, '-') + "\n";
-}
-
-void Menu::checkinMenu()
-{
-    system("cls");
-    cout << string(40, '-') + "\n";
-    cout << "\t欢迎入住秋刀鱼宾馆\n";
-    cout << "\t请选择您要进行的操作\n";
-    cout << "\t\t1.我要入住\n";
-    cout << "\t\t2.修改入住信息\n";
-    cout << "\t\t3.取消入住\n";
-    cout << "\t\t0.返回\n";
-    cout << string(40, '-') + "\n";
-}
-
-void Menu::checkoutMenu()
-{
-    system("cls");
-    cout << string(40, '-') + "\n";
-    cout << "\t欢迎下次光临秋刀鱼宾馆\n";
-    cout << "\t请选择您要进行的操作\n";
-    cout << "\t\t1.退房结算\n";
     cout << "\t\t0.返回\n";
     cout << string(40, '-') + "\n";
 }

@@ -62,6 +62,12 @@ void Room::set_room(int num, string t, int p, char b, char c)
         isBooked = true;
     if (c == 'Y' || c == 'y')
         isChecked = true;
+    guestName = "NULL";
+    guestID = "NULL";
+    guestPhoneNum = "NULL";
+    bookTime = "NULL";
+    checkinTime = "NULL";
+    checkoutTime = "NULL";
 }
 void Room::set_room(int num, string t, int p, char b, char c, string name, string id, string phonenum, string btime, string intime, string outtime)
 {
