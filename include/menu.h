@@ -79,7 +79,6 @@ void Menu::viewMenu()
     cout << "\t请选择您要进行的操作\n";
     cout << "\t\t1.按房间号排序\n";
     cout << "\t\t2.按入住时间排序\n";
-    cout << "\t\t3.按关键词模糊搜索\n";
     cout << "\t\t0.返回\n";
     cout << string(40, '-') + "\n";
 }

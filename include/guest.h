@@ -13,6 +13,8 @@ private:
     int cost;
 
 public:
+    virtual ~Guest() {}
+    void view(Roomlist);
     class Book
     {
     public:
@@ -32,13 +34,29 @@ public:
     } checkout;
 };
 
+void Guest::view(Roomlist roomlist)
+{
+    system("cls");
+    Iterator<Room> it;
+    cout << "房间号\t房间类型\t房间价格\t是否预订\t是否入住\t" << endl;
+    for (it = roomlist.begin(); it != roomlist.end(); ++it)
+    {
+        Room room;
+        room = *it;
+        cout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t';
+        cout << (room.get_isBooked() ? "Yes" : "No") << '\t' << (room.get_isChecked() ? "Yes" : "No") << endl;
+    }
+}
+
 void Guest::Book::add(Roomlist &roomlist)
 {
-    cout << "请输入您要选择预订的房间号：" << endl;
+    cout << "请输入您要选择预订的房间号（输入0退出）：" << endl;
     int num;
     int idx;
     while (cin >> num)
     {
+        if (num == 0)
+            return;
         idx = 0;
         bool flag = false;
         for (auto it = roomlist.begin(); it != roomlist.end(); it++)
@@ -75,11 +93,13 @@ void Guest::Book::add(Roomlist &roomlist)
 
 void Guest::Book::modify(Roomlist &roomlist)
 {
-    cout << "请输入您预订的房间号：" << endl;
+    cout << "请输入您预订的房间号（输入0退出）：" << endl;
     int num;
     int idx;
     while (cin >> num)
     {
+        if (num == 0)
+            return;
         idx = 0;
         bool flag = false;
         for (auto it = roomlist.begin(); it != roomlist.end(); it++)
@@ -200,11 +220,13 @@ void Guest::Book::modify(Roomlist &roomlist)
 
 void Guest::Book::del(Roomlist &roomlist)
 {
-    cout << "请输入您预订的房间号：" << endl;
+    cout << "请输入您预订的房间号（输入0退出）：" << endl;
     int num;
     int idx;
     while (cin >> num)
     {
+        if (num == 0)
+            return;
         idx = 0;
         bool flag = false;
         for (auto it = roomlist.begin(); it != roomlist.end(); it++)
@@ -249,11 +271,13 @@ void Guest::Book::del(Roomlist &roomlist)
 
 void Guest::Checkin::add(Roomlist &roomlist)
 {
-    cout << "请输入您要选择入住的房间号。" << endl;
+    cout << "请输入您要选择入住的房间号（输入0退出）。" << endl;
     int num;
     int idx;
     while (cin >> num)
     {
+        if (num == 0)
+            return;
         idx = 0;
         bool flag = false;
         for (auto it = roomlist.begin(); it != roomlist.end(); it++)
@@ -300,11 +324,13 @@ void Guest::Checkin::add(Roomlist &roomlist)
 
 void Guest::Checkout::checkout(Roomlist &roomlist)
 {
-    cout << "请输入您入住的房间号：" << endl;
+    cout << "请输入您入住的房间号（输入0退出）：" << endl;
     int num;
     int idx;
     while (cin >> num)
     {
+        if (num == 0)
+            return;
         idx = 0;
         bool flag = false;
         for (auto it = roomlist.begin(); it != roomlist.end(); it++)

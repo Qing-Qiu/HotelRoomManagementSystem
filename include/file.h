@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include "adminlist.h"
-#include "admin.h"
 #include "roomlist.h"
 #include "room.h"
 class File
@@ -12,7 +11,7 @@ public:
     Adminlist get_admin_data();
     Roomlist get_room_data();
     void roomInit();
-    void write(Roomlist);
+    void write(Roomlist &);
 };
 
 Adminlist File::get_admin_data()
@@ -92,7 +91,7 @@ void File::roomInit()
     cout << "客房信息初始化成功！" << endl;
 }
 
-void File::write(Roomlist roomlist)
+void File::write(Roomlist &roomlist)
 {
     fstream file;
     file.open("../data/roomdata.txt", ios::out | ios::binary);

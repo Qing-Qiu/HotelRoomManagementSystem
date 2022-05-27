@@ -89,17 +89,14 @@ int main()
                         {
                             guest.sort_by_num(roomlist);
                             system("pause");
+                            back2Main = true;
                             break;
                         }
                         else if (s == "2") //按照入住时间排序
                         {
                             guest.sort_by_time(roomlist);
                             system("pause");
-                            break;
-                        }
-                        else if (s == "3") //搜索功能
-                        {
-                            system("pause");
+                            back2Main = true;
                             break;
                         }
                         else if (s == "0") //返回上一级
@@ -155,11 +152,19 @@ int main()
                         {
                             admin.view(roomlist); //管理员能看到更多的信息
                             system("pause");
+                            back2Default = true;
                             break;
                         }
                         else if (opt_ == "2") //客房信息修改
                         {
                             admin.view(roomlist);
+                            admin.checkin.modify(roomlist);
+    						File file;
+    						file.write(roomlist);
+                            admin.view(roomlist);
+                            system("pause");
+                            back2Default = true;
+                            break;
                         }
                         else if (opt_ == "3") //客房信息初始化
                         {
