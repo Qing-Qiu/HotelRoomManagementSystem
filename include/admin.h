@@ -5,6 +5,7 @@
 #include "file.h"
 #include <string>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 class File;
 class Admin : public Person
@@ -31,15 +32,15 @@ void Admin::view(Roomlist roomlist)
 {
     system("cls");
     Iterator<Room> it;
-    cout << "房间号\t房间类型\t房间价格\t是否预订\t是否入住\t宾客姓名\t宾客身份证号\t宾客手机号码\t宾客预订时间\t宾客入住时间" << endl;
+    cout << "房间号" << setw(15) << "房间类型" << setw(15) << "房间价格" << setw(15) << "是否预订" << setw(15) << "是否入住" << setw(15) << "宾客姓名" << setw(15) << "宾客身份证号" << setw(15) << "宾客手机号码" << setw(15) << "宾客预订时间" << setw(15) << "宾客入住时间" << endl;
     for (it = roomlist.begin(); it != roomlist.end(); ++it)
     {
         Room room;
         room = *it;
-        cout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t'
-             << (room.get_isBooked() ? "Yes" : "No") << '\t' << (room.get_isChecked() ? "Yes" : "No") << '\t'
-             << room.get_guestName() << '\t' << room.get_guestID() << '\t' << room.get_guestPhoneNum() << '\t'
-             << room.get_bookTime() << '\t' << room.get_checkinTime() << endl;
+        cout << room.get_number() << setw(15) << room.get_type() << setw(15) << room.get_price() << setw(15)
+             << (room.get_isBooked() ? "Yes" : "No") << setw(15) << (room.get_isChecked() ? "Yes" : "No") << setw(15)
+             << room.get_guestName() << setw(15) << room.get_guestID() << setw(15) << room.get_guestPhoneNum() << setw(15)
+             << room.get_bookTime() << setw(15) << room.get_checkinTime() << endl;
     }
 }
 

@@ -6,12 +6,13 @@
 #include "iterator.h"
 #include "const_iterator.h"
 #include <windows.h>
+#include <iomanip>
 class Room;
 class Roomlist;
 class Person
 {
 public:
-    virtual void view(Roomlist) =0;
+    virtual void view(Roomlist) = 0;
     virtual ~Person() {}
     void sort_by_time(Roomlist &);
     void sort_by_num(Roomlist &);
@@ -46,13 +47,13 @@ void Person::sort_by_time(Roomlist &roomlist)
     }
     system("cls");
     Iterator<Room> it;
-    cout << "房间号\t房间类型\t房间价格\t是否预订\t是否入住\t" << endl;
+    cout << "房间号" << setw(15) << "房间类型" << setw(15) << "房间价格" << setw(15) << "是否预订" << setw(15) << "是否入住" << endl;
     for (it = roomlist.begin(); it != roomlist.end(); ++it)
     {
         Room room;
         room = *it;
-        cout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t';
-        cout << (room.get_isBooked() ? "Yes" : "No") << '\t' << (room.get_isChecked() ? "Yes" : "No") << endl;
+        cout << room.get_number() << setw(15) << room.get_type() << setw(15) << room.get_price() << setw(15);
+        cout << (room.get_isBooked() ? "Yes" : "No") << setw(15) << (room.get_isChecked() ? "Yes" : "No") << endl;
     }
 }
 
@@ -84,13 +85,13 @@ void Person::sort_by_num(Roomlist &roomlist)
     }
     system("cls");
     Iterator<Room> it;
-    cout << "房间号\t房间类型\t房间价格\t是否预订\t是否入住\t" << endl;
+    cout << "房间号" << setw(15) << "房间类型" << setw(15) << "房间价格" << setw(15) << "是否预订" << setw(15) << "是否入住" << endl;
     for (it = roomlist.begin(); it != roomlist.end(); ++it)
     {
         Room room;
         room = *it;
-        cout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t';
-        cout << (room.get_isBooked() ? "Yes" : "No") << '\t' << (room.get_isChecked() ? "Yes" : "No") << endl;
+        cout << room.get_number() << setw(15) << room.get_type() << setw(15) << room.get_price() << setw(15);
+        cout << (room.get_isBooked() ? "Yes" : "No") << setw(15) << (room.get_isChecked() ? "Yes" : "No") << endl;
     }
 }
 

@@ -159,8 +159,8 @@ int main()
                         {
                             admin.view(roomlist);
                             admin.checkin.modify(roomlist);
-    						File file;
-    						file.write(roomlist);
+                            File file;
+                            file.write(roomlist);
                             admin.view(roomlist);
                             system("pause");
                             back2Default = true;

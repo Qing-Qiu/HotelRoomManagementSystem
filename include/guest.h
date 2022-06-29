@@ -2,6 +2,7 @@
 #define GUEST_H
 #include "person.h"
 #include <string>
+#include <iomanip>
 #include "file.h"
 using namespace std;
 class Roomlist;
@@ -38,13 +39,13 @@ void Guest::view(Roomlist roomlist)
 {
     system("cls");
     Iterator<Room> it;
-    cout << "房间号\t房间类型\t房间价格\t是否预订\t是否入住\t" << endl;
+    cout << "房间号" << setw(15) << "房间类型" << setw(15) << "房间价格" << setw(15) << "是否预订" << setw(15) << "是否入住" << endl;
     for (it = roomlist.begin(); it != roomlist.end(); ++it)
     {
         Room room;
         room = *it;
-        cout << room.get_number() << '\t' << room.get_type() << '\t' << room.get_price() << '\t';
-        cout << (room.get_isBooked() ? "Yes" : "No") << '\t' << (room.get_isChecked() ? "Yes" : "No") << endl;
+        cout << room.get_number() << setw(15) << room.get_type() << setw(15) << room.get_price() << setw(15);
+        cout << (room.get_isBooked() ? "Yes" : "No") << setw(15) << (room.get_isChecked() ? "Yes" : "No") << endl;
     }
 }
 
@@ -366,8 +367,10 @@ void Guest::Checkout::checkout(Roomlist &roomlist)
         cout << "宾客手机号：" << room.get_guestPhoneNum() << endl;
         cout << "宾客预订时间：" << room.get_bookTime() << endl;
         cout << "宾客入住时间：" << room.get_checkoutTime() << endl;
+        cout << "宾客退房时间：" << nowTime() << endl;
         cout << "宾客预付金额：" << 100 << endl;
         cout << "宾客实付金额：" << room.get_price() - 100 << endl;
+        cout << "宾客共付金额：" << room.get_price() << endl;
         //退房后可以生成一个log日志
         roomlist[idx].set_room(room.get_number(), room.get_type(), room.get_price(), false, false);
     }
